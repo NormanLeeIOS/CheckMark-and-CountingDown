@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  AnimationViewController.h
 //  CheckMark&CountingDown
 //
 //  Created by 李亚坤 on 16/5/21.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface AnimationViewController : UIViewController
 
 
 @end

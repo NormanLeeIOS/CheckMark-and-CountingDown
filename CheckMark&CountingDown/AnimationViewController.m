@@ -1,22 +1,26 @@
 //
-//  ViewController.m
+//  AnimationViewController.m
 //  CheckMark&CountingDown
 //
 //  Created by 李亚坤 on 16/5/21.
 //  Copyright © 2016年 李亚坤. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "AnimationViewController.h"
+#import "CountingDownAnimationView.h"
 
-@interface ViewController ()
+@interface AnimationViewController ()
+
+@property (nonatomic, strong) CountingDownAnimationView *countingDownView;
 
 @end
 
-@implementation ViewController
+@implementation AnimationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
 }
 
 - (void)didReceiveMemoryWarning {
