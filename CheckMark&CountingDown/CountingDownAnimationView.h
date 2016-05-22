@@ -8,14 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+@class CountingDownAnimationView;
+
+@protocol CountingDownAnimationViewDelegate <NSObject>
+
+- (void)finishCountingDown:(CountingDownAnimationView *)countingDownView;
+
+@end
+
 @interface CountingDownAnimationView : UIView
 
-@property (nonatomic, assign) CGFloat timeNumber;
+@property (nonatomic, weak) id<CountingDownAnimationViewDelegate> delegate;
 
 - (instancetype)initWithFrame:(CGRect)frame;
 
-- (void)willAppear;
+- (void)startCountDownTimer;
 
-- (void)willDisappear;
+- (void)stopCountdown;
 
 @end
