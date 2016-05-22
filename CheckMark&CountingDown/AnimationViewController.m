@@ -19,26 +19,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.countingDownView.delegate = self;
-    // Do any additional setup after loading the view, typically from a nib.
-    
-
+    // Do any additional setup after loading the view, typically from a nib
     
     UIButton *restartBtn = [[UIButton alloc] initWithFrame:CGRectMake(50.0, 50.0, 100.0, 50.0)];
     restartBtn.backgroundColor = [UIColor yellowColor];
     [restartBtn addTarget:self action:@selector(restartCountingTime) forControlEvents:UIControlEventTouchUpInside];
-    [restartBtn setTitle:[NSString stringWithFormat:@"重新倒计时"] forState:UIControlStateNormal];
+    [restartBtn setTitle:[NSString stringWithFormat:@"restartCount"] forState:UIControlStateNormal];
     [restartBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     
     UIButton *loadCountDownBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(restartBtn.frame) + 10.0, 50.0, 100.0, 50.0)];
     loadCountDownBtn.backgroundColor = [UIColor grayColor];
     [loadCountDownBtn addTarget:self action:@selector(loadCountingTime) forControlEvents:UIControlEventTouchUpInside];
-    [loadCountDownBtn setTitle:[NSString stringWithFormat:@"加载倒计时"] forState:UIControlStateNormal];
+    [loadCountDownBtn setTitle:[NSString stringWithFormat:@"loadCount"] forState:UIControlStateNormal];
     [loadCountDownBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
 
     [self.view addSubview:loadCountDownBtn];
     [self.view addSubview:restartBtn];
     
+}
+
+- (void)dealloc
+{
+    self.countingDownView.delegate = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,6 +53,7 @@
     if (_countingDownView == nil) {
         _countingDownView = [[CountingDownAnimationView alloc] initWithFrame:self.view.frame];
         [self.view insertSubview:_countingDownView atIndex:1];
+        self.countingDownView.delegate = self;
     }
 }
 
@@ -63,7 +66,7 @@
 # pragma CountingDownAnimationViewDelegate
 
 - (void)finishCountingDown:(CountingDownAnimationView *)countingDownView {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"注意" message:@"倒计时30s完成" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Here" message:@"30s Finish!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alertView show];
 }
 

@@ -122,10 +122,6 @@
 
 - (void)updateCountDown:(NSTimer *)timer
 {
-    if (self.secondsCountDown == 30) {
-        [self roundAnimate];
-    }
-    
     if (self.secondsCountDown >= 0) {
         self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)self.secondsCountDown];
         self.secondsCountDown --;
