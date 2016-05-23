@@ -94,17 +94,23 @@
 
 #pragma mark - private methods
 
+CGFloat radiansForHour(CGFloat hour)
+{
+    return 2 * M_PI * (hour - 3) / 12;
+}
+
 - (void)roundAnimate
 {
     CFTimeInterval baseTime; // The zero-time of animation
     baseTime = [self.layer convertTime:CACurrentMediaTime() fromLayer:nil];
-    CGRect boundingRect = CGRectMake(self.frame.size.width/2 - 70.0, self.frame.size.height/2 - 70.0, 140, 140);
     CAKeyframeAnimation *orbit = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-    NSValue *keyStart = [NSValue valueWithCGPoint: CGPointMake(_round.layer.position.x, _round.layer.position.y - 70.0f)];
-    NSValue *keyEnd = [NSValue valueWithCGPoint: CGPointMake(_round.layer.position.x - 70.0f, _round.layer.position.y)];
+    NSValue *keyStart = [NSValue valueWithCGPoint: CGPointMake(self.frame.size.width/2, self.frame.size.height/2 - 70.0)];
+    NSValue *keyEnd = [NSValue valueWithCGPoint: CGPointMake(self.frame.size.width/2, self.frame.size.height/2 - 70.0)];
     orbit.values = @[keyStart,keyEnd];
     orbit.duration = 1;
-    orbit.path = CGPathCreateWithEllipseInRect(boundingRect, nil);
+    CGMutablePathRef curvedPath =  CGPathCreateMutable();
+    CGPathAddArc(curvedPath, NULL, self.frame.size.width/2, self.frame.size.height/2, 70, radiansForHour(12), radiansForHour(12 + 12), NO);
+    orbit.path = curvedPath;
     orbit.calculationMode = kCAAnimationPaced;
     orbit.repeatCount = MAXFLOAT;
     orbit.beginTime = baseTime;
