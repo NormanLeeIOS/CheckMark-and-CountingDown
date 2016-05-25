@@ -237,7 +237,16 @@ CGFloat radiansForHour(CGFloat hour)
     xOrbit.fillMode = kCAFillModeBackwards;
     xOrbit.beginTime = baseTime + 0.5;
     xOrbit.repeatCount = 1;
-    [failurePathLayer addAnimation:xOrbit forKey:@"X"];
+    [failurePathLayer addAnimation:xOrbit forKey:@"XPath"];
+    
+    CABasicAnimation *xStrokeColor = [CABasicAnimation animationWithKeyPath:@"strokeColor"];
+    xStrokeColor.duration = 0.4;
+    xStrokeColor.fromValue = (__bridge id _Nullable)([UIColor clearColor].CGColor);
+    xStrokeColor.toValue = (__bridge id _Nullable)([UIColor yellowColor].CGColor);
+    xStrokeColor.fillMode = kCAFillModeBackwards;
+    xStrokeColor.beginTime = baseTime + 1.1;
+    xStrokeColor.repeatCount = 1;
+    [failurePathLayer addAnimation:xStrokeColor forKey:@"XStrokeColor"];
 }
 
 #pragma mark - counting down methods
@@ -280,7 +289,7 @@ CGFloat radiansForHour(CGFloat hour)
 }
 
 - (void)stateFailure {
-    if ([_arcLayer animationForKey:@"Failure"]) {
+    if ([_arcLayer animationForKey:@"failure"]) {
         self.state = ParticipateStateFinish;
     } else {
         [self failureAnimate];
